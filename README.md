@@ -12,5 +12,8 @@ A minimal Windows app that displays a progress bar showcasing the elapsed progre
 - Persistent window position across sessions
 
 ## Installation:
-Download 
+1. Go to the **Releases** section of this repo.
+2. Download the latest `Year-Progress-Bar-...-win-x64.zip`.
+3. Extract the zip.
+4. Run `YearProgress.exe`.
 
