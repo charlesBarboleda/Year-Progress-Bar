@@ -5,11 +5,11 @@
 A minimal Windows app that displays a progress bar showcasing the elapsed progress of the current year
 
 ## Features:
-• Minimal always-on-top widget (stays visible above other windows)
-• Hidden from the taskbar (no taskbar button clutter)
-• System tray controls (hidden icons): Show/Hide and Exit
-• Updates automatically every minute
-• Persistent window position across sessions
+- Minimal always-on-top widget (stays visible above other windows)
+- Hidden from the taskbar (no taskbar button clutter)
+- System tray controls (hidden icons): Show/Hide and Exit
+- Updates automatically every minute
+- Persistent window position across sessions
 
 ## Installation:
 Download 
