@@ -1,6 +1,7 @@
 # Year-Progress-Bar
-<img width="437" height="44" alt="image" src="https://github.com/user-attachments/assets/b0661197-9bd0-442e-9d6a-397aecb6dba7" />
-<img width="131" height="36" alt="image" src="https://github.com/user-attachments/assets/62af5713-1928-4bd5-8fa9-360b007fc5dd" />
+
+<img width="445" height="36" alt="image" src="https://github.com/user-attachments/assets/effabd6c-2553-4229-a942-5747cc8c6608" />
+<img width="132" height="37" alt="image" src="https://github.com/user-attachments/assets/3bd46d70-1f08-4924-a9e5-232733ec76d6" />
 
 A minimal Windows widget that shows how much of the current year has elapsed.
 
