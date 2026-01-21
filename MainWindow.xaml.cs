@@ -141,9 +141,15 @@ namespace YearProgress
         {
             double percent = YearProgressCalculator.GetProgressPercent(DateTime.Now);
             YearProgressBarControl.Value = percent;
-            double shown = Math.Floor(percent * 100) / 100;
 
-            PercentText.Text = _isCompactMode ? $"{shown:0.00}%" : $"{shown:0.000}%";
+            int decimals = _isCompactMode ? 2 : 3;
+
+            static double TruncateDecimals(double value, int decimals) => Math.Floor(value * Math.Pow(10, decimals)) / Math.Pow(10, decimals);
+            double shown = TruncateDecimals(percent, decimals);
+
+            PercentText.Text = _isCompactMode
+                ? $"{shown:0.00}%"
+                : $"{shown:0.000}%";
         }
 
         void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

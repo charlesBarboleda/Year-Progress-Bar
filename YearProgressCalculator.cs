@@ -70,5 +70,6 @@ namespace YearProgress
 
             return (elapsedDays, totalDays);
         }
+
     }
 }
