@@ -12,6 +12,11 @@ namespace YearProgress
         readonly DispatcherTimer _minuteTimer = new();
         static readonly string PlacementPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "YearProgress", "window.json");
 
+        private bool _isCompactMode = false;
+        public bool IsCompactMode => _isCompactMode;
+
+        private const double FullBarWidth = 220;
+        private const double CompactBarWidth = FullBarWidth * 0.25; // 55
 
         public MainWindow()
         {
@@ -28,6 +33,17 @@ namespace YearProgress
             public double Top { get; set; }
             public double Width { get; set; }
             public double Height { get; set; }
+        }
+
+        public void SetCompactMode(bool compact)
+        {
+            _isCompactMode = compact;
+
+            TitleText.Visibility = compact ? Visibility.Collapsed : Visibility.Visible;
+            YearProgressBarControl.Width = compact ? CompactBarWidth : FullBarWidth;
+            MainBorder.Padding = compact ? new Thickness(2, 1, 6, 1) : new Thickness(6, 1, 6, 1);
+
+            UpdateUI();
         }
 
         void Window_Loaded(object sender, RoutedEventArgs e)
@@ -125,7 +141,9 @@ namespace YearProgress
         {
             double percent = YearProgressCalculator.GetProgressPercent(DateTime.Now);
             YearProgressBarControl.Value = percent;
-            PercentText.Text = $"{YearProgressCalculator.GetProgressPercentText(DateTime.Now, 3)}";
+            double shown = Math.Floor(percent * 100) / 100;
+
+            PercentText.Text = _isCompactMode ? $"{shown:0.00}%" : $"{shown:0.000}%";
         }
 
         void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

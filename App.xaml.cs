@@ -35,9 +35,30 @@ namespace YearProgress
             };
 
             var menu = new ContextMenuStrip();
+
             menu.Items.Add("Show / Hide", null, (_, _) => ToggleWindow());
+
+            var compactItem = new ToolStripMenuItem("Compact Mode")
+            {
+                CheckOnClick = true,
+                Checked = _window.IsCompactMode
+            };
+            compactItem.CheckedChanged += (_, _) =>
+            {
+                if (_window == null) return;
+
+                // WinForms tray event -> safe to marshal to WPF dispatcher
+                _window.Dispatcher.Invoke(() =>
+                {
+                    _window.SetCompactMode(compactItem.Checked);
+                });
+            };
+            menu.Items.Add(compactItem);
+
             menu.Items.Add(new ToolStripSeparator());
+
             menu.Items.Add("Exit", null, (_, _) => ExitFromTray());
+
             _tray.ContextMenuStrip = menu;
 
             _tray.DoubleClick += (_, _) => ToggleWindow();
@@ -47,15 +68,18 @@ namespace YearProgress
         {
             if (_window == null) return;
 
-            if (_window.IsVisible)
+            _window.Dispatcher.Invoke(() =>
             {
-                _window.Hide();
-            }
-            else
-            {
-                _window.Show();
-                _window.Activate();
-            }
+                if (_window.IsVisible)
+                {
+                    _window.Hide();
+                }
+                else
+                {
+                    _window.Show();
+                    _window.Activate();
+                }
+            });
         }
 
         void ExitFromTray()
@@ -69,7 +93,7 @@ namespace YearProgress
                 _tray = null;
             }
 
-            _window?.Close();
+            _window?.Dispatcher.Invoke(() => _window.Close());
             Shutdown();
         }
 

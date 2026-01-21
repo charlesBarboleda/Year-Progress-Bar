@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Year Progress"
-        Width="350" Height="36"
+        SizeToContent="Width"
+        Height="32"
         ResizeMode="NoResize"
         Background="Transparent"
         AllowsTransparency="True"
@@ -40,45 +41,48 @@
         </Style>
     </Window.Resources>
 
-    <Border CornerRadius="8"
-            Background="#000000"
-            BorderBrush="#2A2A2A"
-            BorderThickness="1"
-            Padding="6">
+    <Border x:Name="MainBorder"
+        CornerRadius="8"
+        Background="#000000"
+        BorderBrush="#2A2A2A"
+        BorderThickness="1"
+        Padding="6,1">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="2"/>   
-                <ColumnDefinition Width="Auto"/>  
-                <ColumnDefinition Width="4"/>   
-                <ColumnDefinition Width="*"/>  
+                <ColumnDefinition Width="Auto"/>  <!-- Title + Percent Texts -->
+                <ColumnDefinition Width="5"/>    <!-- Gap -->
+                <ColumnDefinition Width="Auto"/>  <!-- Progress bar -->
             </Grid.ColumnDefinitions>
 
-            <TextBlock x:Name="TitleText"
-                    Grid.Column="0"
-                    FontFamily="Segoe UI"
-                    FontSize="12"
-                    FontWeight="Bold"
-                    Foreground="#FFFFFF"
-                    VerticalAlignment="Center"
-                    Text="Year Progress: "/>
+            <StackPanel Grid.Column="0"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center">
 
-            <TextBlock x:Name="PercentText"
-                    Grid.Column="2"
-                    FontFamily="Segoe UI"
-                    FontSize="12"
-                    FontWeight="SemiBold"
-                    Foreground="#FFFFFF"
-                    VerticalAlignment="Center"
-                    Text="0.00%"/>
+                <TextBlock x:Name="TitleText"
+                        FontFamily="Segoe UI, Arial, sans-serif"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Foreground="#FFFFFF"
+                        VerticalAlignment="Center"
+                        Text="Year Progress:"/>
+
+                <TextBlock x:Name="PercentText"
+                        FontFamily="Segoe UI, Arial, sans-serif"
+                        FontSize="12"
+                        FontWeight="SemiBold"
+                        Foreground="#FFFFFF"
+                        VerticalAlignment="Center"
+                        Margin="6,0,0,0"
+                        Text="0.000%"/>
+            </StackPanel>
 
             <ProgressBar x:Name="YearProgressBarControl"
-                        Grid.Column="4"
+                        Grid.Column="2"
+                        Width="220"
                         Minimum="0"
                         Maximum="100"
                         Style="{StaticResource Win10RoundedProgressBar}"
                         VerticalAlignment="Center"/>
-            
         </Grid>
     </Border>
 </Window>
